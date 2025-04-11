@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css.css" />
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pokemon!</title>
+  </head>
+  <body>
+    <h1>Pokemon</h1>
+    <div id="pokemon"></div>
+    <script>
+      function fetchPokemon(pokemon) {
+        return fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon).then(
+          (response) => response.json()
+        );
+      }
+
+      async function displayPokemon(pokemon) {
+        const data = await fetchPokemon(pokemon);
+        document.querySelector("#pokemon").innerHTML = ` 
+                <h1>${data.name}</h1>
+                <img src="${data.sprites.other.showdown.front_shiny_female}" alt="${data.name}">
+                `;
+      }
+
+      displayPokemon("pikachu");
+    </script>
+  </body>
+</html>
